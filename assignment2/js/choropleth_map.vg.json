@@ -25,7 +25,8 @@
     "color": {
       "field": "total_cases_per_million",
       "type": "quantitative",
-      "scale": {"type": "log"}
+      "scale": {"type": "log"},
+      "title": "Total Cases Per Million"
     },
     "tooltip": [
       {"field": "properties.NAME", "type": "nominal", "title": "Country"},
