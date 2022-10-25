@@ -1,0 +1,46 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {
+        "url": "https://raw.githubusercontent.com/owid/monkeypox/main/owid-monkeypox-data.csv"
+  },
+  "width": 650,
+  "height": 2000,
+  "title": "COVID-19 Total Cases per Month (latest)",
+  "config": {
+    "view": {
+        "stroke": "transparent",
+        "strokeWidth": 0
+    },
+    "axis": {
+        "grid": true,
+        "domain": false,
+        "labelFontSize": 14,
+        "labelFont": "Roboto, Helvetica, Arial, sans-serif"
+    }
+  },
+  "mark": "rect",
+  "encoding": {
+    "x": {
+        "field": "date",
+        "timeUnit": "month",
+        "type": "ordinal",
+        "title": ""
+    },
+    "y": {
+        "field": "location",
+        "type": "nominal",
+        "title": ""
+    },
+    "color": {
+        "field": "total_cases",
+        "aggregate": "sum",
+        "type": "quantitative",
+        "title": "Total Cases"
+    },
+    "tooltip": [
+        {"field": "location", "type": "nominal", "title": "Country"},
+        {"field": "total_cases", "type": "quantitative", "title": "Total Cases"},
+        {"field": "date", "type": "temporal", "title": "Date"}
+      ]
+  }
+}

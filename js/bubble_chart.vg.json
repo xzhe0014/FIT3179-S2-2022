@@ -1,0 +1,85 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 750,
+    "height": 400,
+    "data": {
+        "url": "https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv"
+    },
+    "transform": [
+        {"filter": "datum.total_cases > 0"},
+        {"filter": "datum.total_deaths > 0"},
+        {"filter": {"timeUnit": "yearmonthdate", "field": "date", "equal": "Oct 20, 2022"}}
+    ],
+    "params":[
+        {
+            "name": "continent_highlight",
+            "select": {"type": "point", "fields": ["continent"]},
+            "bind": "legend"
+        }
+    ],
+    "mark": "circle",
+    "encoding": {
+        "x": {
+            "field": "total_cases",
+            "type": "quantitative",
+            "title": "Total Cases",
+            "axis": {"tickCount": 7},
+            "scale": {"type": "log", "domain": [1, 100000000]}
+        },
+        "y": {
+            "field": "total_deaths",
+            "type": "quantitative",
+            "title": "Total Deaths",
+            "axis": {"tickCount": 6},
+            "scale": {"type": "log", "domain": [1, 1100000]}
+        },
+        "color": {
+            "field": "continent",
+            "type": "nominal",
+            "title": "Continent",
+            "scale": {
+                "domain": [
+                    "North America",
+                    "South America",
+                    "Europe",
+                    "Africa",
+                    "Asia",
+                    "Oceania"
+                ],
+                "range": [
+                    "#e41a1c",
+                    "#984ea3",
+                    "#ff7f00",
+                    "#a6cee3",
+                    "#377eb8",
+                    "#a65628"
+                ]
+            }
+        },
+        "opacity": {
+            "condition": {"param": "continent_highlight", "value": 0.6},
+            "value": 0.2
+        },
+        "size": {
+            "field": "population_density",
+            "type": "quantitative",
+            "title": "Population Density",
+            "scale": {
+                "type": "threshold",
+                "domain": [50, 100, 200, 500, 1000]
+            },
+            "legend": {"format": ".1s"}
+        },
+        "tooltip": [
+            {"field": "location", "type": "nominal", "title": "Country"},
+            {"field": "total_cases", "type": "quantitative", "format": ",", "title": "Total Cases"},
+            {"field": "total_deaths", "type": "quantitative", "format": ",", "title": "Total Deaths"},
+            {
+                "field": "total_cases_per_million",
+                "type": "quantitative",
+                "format": ".2f",
+                "title": "Total Cases Per Million"
+            }
+        ]
+    }
+}

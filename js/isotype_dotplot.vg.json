@@ -1,0 +1,31 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "config": {"view": {"stroke": ""}},
+  "width": 800,
+  "height": 1000,
+  "data": {
+    "url": "https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv"
+  },
+  "transform": [
+    {"filter": {"timeUnit": "yearmonthdate", "field": "date", "equal": "Oct 20, 2022"}},
+    {"filter": "datum.people_vaccinated_per_hundred > 0"}
+  ],
+  "mark": {"type": "point", "filled": true},
+  "encoding": {
+    "x": {"field": "people_vaccinated_per_hundred", "type": "ordinal", "axis": null},
+    "y": {"field": "location", "type": "nominal", "header": {"title": ""}, "title": ""},
+    "shape": {
+      "value": "M1.7 -1.7h-0.8c0.3 -0.2 0.6 -0.5 0.6 -0.9c0 -0.6 -0.4 -1 -1 -1c-0.6 0 -1 0.4 -1 1c0 0.4 0.2 0.7 0.6 0.9h-0.8c-0.4 0 -0.7 0.3 -0.7 0.6v1.9c0 0.3 0.3 0.6 0.6 0.6h0.2c0 0 0 0.1 0 0.1v1.9c0 0.3 0.2 0.6 0.3 0.6h1.3c0.2 0 0.3 -0.3 0.3 -0.6v-1.8c0 0 0 -0.1 0 -0.1h0.2c0.3 0 0.6 -0.3 0.6 -0.6v-2c0.2 -0.3 -0.1 -0.6 -0.4 -0.6z"
+    },
+    "color": {
+      "condition": {"param": "highlight", "value": "rgb(194,81,64)"},
+      "value": "rgb(167,165,156)"
+    },
+    "size": {"value": 90},
+    "tooltip": [
+      {"field": "location", "type": "nominal", "title": "Country"},
+      {"field": "people_vaccinated_per_hundred", "type": "ordinal", "title": "Vaccinated per Hundred"}
+    ]
+  },
+  "params": [{"name": "highlight", "select": "interval"}]
+}
