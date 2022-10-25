@@ -5,7 +5,6 @@
   },
   "width": 650,
   "height": 2000,
-  "title": "COVID-19 Total Cases per Month (latest)",
   "config": {
     "view": {
         "stroke": "transparent",
